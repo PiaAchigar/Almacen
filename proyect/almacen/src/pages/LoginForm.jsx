@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import {
   FormControl,
   FormLabel,
@@ -8,43 +9,53 @@ import {
   Container,
   Button,
 } from "@chakra-ui/react";
-import { Field, Form, Formik } from "formik";
+// import { Field, Form, Formik } from "formik";
 import { useForm } from "react-hook-form";
 
 const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (values) => {
     console.log(values);
+    /**Debo de enviar usu y pass para que el back lo valide */
   };
-  /**Debo de enviar usu y pass para que el back lo valide */
 
   return (
     <>
       <Container maxW="md" maxH="md" direction={"colum"} placeItems="center">
         <form onSubmit={handleSubmit(onSubmit)}>
-        <FormControl id="name" marginBottom={10} isInvalid={errors.name} isRequired>
-          <FormLabel >Usuario</FormLabel>
-          <Input
-            type="name"
-            placeholder="Ingresa tu nombre"
-            autoComplete="off"
-            
-            {...register("name", { required: true })}
-          />
-        </FormControl>
-        <FormControl id="pass" marginBottom={10} isRequired>
-          <FormLabel>Password</FormLabel>
-          <Input type="pass" placeholder="**********" {...register("pass", { required: true })} />
-          {/* {errors.name && <span textColor="red">Datos incorresctos</span>} */}
-        </FormControl>
-
-        <Button type="submit" backgroundColor="green" textColor="white">Ingresar</Button>
+          <FormControl
+            id="name"
+            marginBottom={10}
+            isInvalid={errors.name}
+            isRequired
+          >
+            <FormLabel>Usuario</FormLabel>
+            <Input
+              type="name"
+              placeholder="Ingresa tu nombre"
+              autoComplete="off"
+              {...register("name", { required: true })}
+            />
+          </FormControl>
+          <FormControl id="pass" marginBottom={10} isRequired>
+            <FormLabel>Password</FormLabel>
+            <Input
+              type="pass"
+              placeholder="**********"
+              {...register("pass", { required: true })}
+            />
+            {/* {errors.name && <span textColor="red">Datos incorresctos</span>} */}
+          </FormControl>
+          <NavLink exact to="/principal">
+            <Button type="submit" backgroundColor="green" textColor="white">
+              Ingresar
+            </Button>
+          </NavLink>
         </form>
       </Container>
     </>
