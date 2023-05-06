@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 // import Layout from '../components/layout/Layout'
 // import { Details } from '../pages/Details'
 // import { Home } from '../pages/Home'
-import  LoginForm  from '../pages/LoginForm'
+import LoginForm from '../pages/LoginForm'
 import Principal from "../pages/Principal"
 import Carga from "../pages/Carga"
 import Retirar from "../pages/Retirar"
