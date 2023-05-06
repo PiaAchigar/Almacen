@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+  # api:
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfile
+  #   depends_on:
+  #     - dbmongo
+  #   links:
+  #     - dbmongo
+  #   volumes:
+  #     - ./:/app
+  #     - /app/node_modules
+  #   ports:
+  #     - "3001:3001"
+  #   environment:
+  #     - NODE_ENV=development
+  #     - PORT=3001
+  #   command: "npm run watch"
+
+  dbmongo:
+    image: mongo:latest
+    container_name: mongo_container_almacen
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+      - MONGO_INITDB_DATABASE=almacen
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_data_db_almacen:/data_almacen/db
+
+volumes:
+  mongo_data_db_almacen:
