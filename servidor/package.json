@@ -2,10 +2,11 @@
   "name": "servidor",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "server.js",
   "scripts": {
-    "mongo": "docker-compose up -d",
-    "watch": "nodemon server.js"
+    "mongo": "no docker-compose up -d",
+    "watch": "nodemon server.js",
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",

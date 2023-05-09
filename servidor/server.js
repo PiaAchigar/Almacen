@@ -9,20 +9,20 @@ dotenv.config();  // con ésta linea lo que hago es inyectar todo lo que esta en
 
 const PORT = process.env.PORT || 8080;
 
-mongoose.connect("mongodb://admin:123456@localhost:27017/almacen?authSource=admin").then(()=>{
-  console.log("conectado a mongo")
-}).catch(error => {
-  console.log(error)
-});
-
-//como me conecto a la bd de mongoAtlas??
-// mongoose.connect(
-//   "mongodb+srv://pia:EyBuOppa7XvDu65z@cluster0.5z86n.mongodb.net/?retryWrites=true&w=majority"
-// ).then(()=>{
+// mongoose.connect("mongodb://admin:123456@localhost:27017/almacen?authSource=admin").then(()=>{
 //   console.log("conectado a mongo")
 // }).catch(error => {
 //   console.log(error)
-// });;
+// });
+
+//como me conecto a la bd de mongoAtlas??
+mongoose.connect(
+  "mongodb+srv://achigarpia:6hYUReXYEjM3BRSa@clusteralmacen.98ovoph.mongodb.net/?retryWrites=true&w=majority"
+).then(()=>{
+  console.log("conectado a mongo")
+}).catch(error => {
+  console.log(error)
+});;
 
 const appRouter = require("./router/appRouter");
 
