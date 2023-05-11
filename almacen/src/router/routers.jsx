@@ -8,6 +8,7 @@ import Carga from "../pages/Carga"
 import Retirar from "../pages/Retirar"
 import Productos from "../pages/Productos"
 import Actualizar from "../pages/Actualizar"
+import Register from "../pages/RegisterForm"
 // import { User } from '../pages/User'
 
 export const RouterApp = () => {
@@ -15,6 +16,7 @@ export const RouterApp = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<Register />} />
         <Route index path="/" element={<LoginForm />} />
         <Route path="/principal" element={<Principal />} />
         <Route path="/carga" element={<Carga />} />

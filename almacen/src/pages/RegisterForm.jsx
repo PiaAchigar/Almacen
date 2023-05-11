@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   FormControl,
@@ -8,12 +8,15 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const navigate = useNavigate(); // Obtener el objeto de historial
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [role, setRole] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleRegister = async () => {
     try {
@@ -34,16 +37,26 @@ const LoginForm = () => {
         setPassword("");
         setEmail("");
         setRole("");
-        navigate("/principal"); // Redirecciona a Principal.jsx
+        navigate("/login"); // Redirecciona a LoginForm.jsx
       }
     } catch (error) {
       console.error("Error al registrar el usuario:", error);
     }
   };
-  const handleRegistrationClick = () => {
-    navigate("/register");
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
   };
-  
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setPasswordsMatch(e.target.value === confirmPassword);
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+    setPasswordsMatch(e.target.value === password);
+  };
+
   return (
     <>
       <Container maxW="md" maxH="md" direction={"colum"} placeItems="center">
@@ -65,40 +78,50 @@ const LoginForm = () => {
               placeholder="Ingresa tu email"
               autoComplete="off"
               value={email}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </FormControl>
           <FormControl id="password" marginBottom={10} isRequired>
-            <FormLabel>Password</FormLabel>
+            <FormLabel>Contraseña</FormLabel>
             <Input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="**********"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handlePasswordChange}
             />
+            <button type="button" onClick={handleTogglePassword}>
+              {showPassword ? "Ocultar" : "Mostrar"}
+            </button>
           </FormControl>
-
+          <FormControl id="password2" marginBottom={10} isRequired>
+            <FormLabel>Vuelva a escribir su Contraseña</FormLabel>
+            <Input
+              type={showPassword ? "text" : "password"}
+              placeholder="**********"
+              value={password}
+              onChange={handleConfirmPasswordChange}
+            />
+            <button type="button" onClick={handleTogglePassword}>
+              {showPassword ? "Ocultar" : "Mostrar"}
+            </button>
+          </FormControl>
+          {passwordsMatch ? (
+            <p>Las contraseñas coinciden.</p>
+          ) : (
+            <p>Las contraseñas no coinciden.</p>
+          )}
           <Button
             type="button"
             onClick={handleRegister}
             backgroundColor="green"
             textColor="white"
           >
-            Ingresar
+            Registrarse
           </Button>
-
         </form>
-        <Button
-            type="button"
-            backgroundColor="green"
-            textColor="white"
-            onClick={handleRegistrationClick}
-          >
-           Registrarme
-          </Button>
       </Container>
     </>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
