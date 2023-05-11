@@ -3,12 +3,11 @@ const bcrypt = require("bcrypt");
 const userModel = require("../models/userModel");
 
 const createUser = async (user) => {
-  const password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
-  user.password = password;
+  const hashedPassword = await bcrypt.hash(user.password, 10);
   const newUser = new userModel({
     name: user.name,
     email: user.email,
-    password: user.password,
+    password: hashedPassword,
   });
   return await newUser.save();
 };
@@ -19,6 +18,10 @@ const getUsers = async () => {
 
 const getUserById = async (id) => {
   return await userModel.findById(id);
+};
+
+const getUserByEmail = async (email) => {
+  return await userModel.findOne({ email });
 };
 
 const updateUser = async (id, user) => {
@@ -47,6 +50,9 @@ const updatePassword = async (id, password) => {
   return await userModel.updateOne({ _id: id }, { password: newPassword });
 };
 
+const deleteOne = async (id) => {
+  await userModel.deleteOne({ _id: id });
+}
 module.exports = {
   createUser,
   getUsers,
@@ -55,4 +61,6 @@ module.exports = {
   deleteUser,
   verifyUser,
   updatePassword,
+  getUserByEmail,
+  deleteOne
 };
