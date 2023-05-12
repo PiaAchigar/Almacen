@@ -7,7 +7,7 @@ import {
   Container,
   Button,
   Box,
-  Text
+  Text,
 } from "@chakra-ui/react";
 
 const RegisterForm = () => {
@@ -82,7 +82,14 @@ const RegisterForm = () => {
 
   return (
     <>
-      <Container maxW="md" maxH="md" direction={"colum"} placeItems="center">
+      <Container
+        maxW="md"
+        maxH="md"
+        direction={"colum"}
+        justifyContent="center"
+        h="auto"
+        alignItems="center"
+      >
         <form>
           <Box p={10}>
             <FormControl id="name" marginBottom={10} isRequired>
@@ -125,12 +132,11 @@ const RegisterForm = () => {
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange}
               />
-              <button type="button" onClick={handleTogglePassword}>
-                {showPassword ? "Ocultar" : "Mostrar"}
-              </button>
-              {!passwordsMatch && <Text color="red">Las contraseñas NO coinciden.</Text>}
+
+              {!passwordsMatch && (
+                <Text color="red">Las contraseñas NO coinciden.</Text>
+              )}
             </FormControl>
-            
           </Box>
 
           <Button
@@ -139,6 +145,9 @@ const RegisterForm = () => {
             backgroundColor="green"
             textColor="white"
             isDisabled={!isFormValid}
+            width="80%"
+            m="auto"
+            alignItems="center"
           >
             Registrarse
           </Button>

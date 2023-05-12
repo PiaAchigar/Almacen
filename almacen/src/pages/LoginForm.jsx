@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  FormControl,
-  FormLabel,
-  Input,
-  Container,
-  Button,
-} from "@chakra-ui/react";
+import {FormControl, FormLabel, Input, Container, Button, Text} from '@chakra-ui/react';
 
 const LoginForm = () => {
   const navigate = useNavigate(); // Obtener el objeto de historial
@@ -14,10 +8,12 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  const [isFormFull, setIsFormFull] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(false);
 
   const handleRegister = async () => {
     try {
-      const response = await fetch("http://localhost:3001/user/register", {
+      const response = await fetch("http://localhost:3001/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -36,66 +32,63 @@ const LoginForm = () => {
         setRole("");
         navigate("/principal"); // Redirecciona a Principal.jsx
       }
+      if(data.error){
+        setErrorMsg(true);
+      }
     } catch (error) {
+      setErrorMsg(true);
       console.error("Error al registrar el usuario:", error);
     }
   };
   const handleRegistrationClick = () => {
     navigate("/register");
   };
-  
+  const validateForm = () => {
+    setIsFormFull(email !== "" && password !== "");
+  };
+  useEffect(() => {
+    validateForm();
+  }, [email, password,errorMsg]);
   return (
     <>
       <Container maxW="md" maxH="md" direction={"colum"} placeItems="center">
         <form>
           <FormControl id="name" marginBottom={10} isRequired>
-            <FormLabel>Usuario</FormLabel>
-            <Input
-              type="name"
-              placeholder="Ingresa tu nombre"
-              autoComplete="off"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </FormControl>
-          <FormControl id="email" marginBottom={10} isRequired>
             <FormLabel>Email</FormLabel>
             <Input
               type="email"
-              placeholder="Ingresa tu email"
               autoComplete="off"
               value={email}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </FormControl>
           <FormControl id="password" marginBottom={10} isRequired>
             <FormLabel>Password</FormLabel>
             <Input
               type="password"
-              placeholder="**********"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormControl>
-
+          {errorMsg && <Text color="red">Corrobora tus datos</Text>}
           <Button
             type="button"
             onClick={handleRegister}
             backgroundColor="green"
             textColor="white"
+            isDisabled={!isFormFull}
           >
             Ingresar
           </Button>
-
         </form>
         <Button
-            type="button"
-            backgroundColor="green"
-            textColor="white"
-            onClick={handleRegistrationClick}
-          >
-           Registrarme
-          </Button>
+          type="button"
+          backgroundColor="green"
+          textColor="white"
+          onClick={handleRegistrationClick}
+        >
+          Registrarme
+        </Button>
       </Container>
     </>
   );

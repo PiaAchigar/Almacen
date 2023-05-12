@@ -6,7 +6,7 @@ import { RouterApp } from "./router/routers";
 function App() {
   return (
     <ChakraProvider>
-      <Stack direction={"column"} justifyContent="center" h="100%">
+      <Stack display="grid" direction="column"  h="100%" placeItems="center">
         <RouterApp />
       </Stack>
     </ChakraProvider>
