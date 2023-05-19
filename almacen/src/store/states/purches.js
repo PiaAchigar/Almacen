@@ -1,0 +1,1 @@
+//carrito de las cosas que se va a dar de baja

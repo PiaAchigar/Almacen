@@ -29,7 +29,7 @@ mongoose.connect(
 
 app.use(cors()); 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));//acá no debe de ser "false"
+app.use(express.urlencoded({ extended: true }));//acá no debe de ser "false"??
 app.use("/", appRouter);
 // app.post("/",appRouter);
 
