@@ -1,15 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import jwt_decode from "jwt-decode";
 import { loginService } from "../../services/auth.service";
-
-const tokenkey = "token";
-
-const persistSession = (token) =>
-  window.sessionStorage.setItem(tokenkey, token);
-
-const getSession = () => window.sessionStorage.getItem(tokenkey);
-
-const removeSession = () => window.sessionStorage.removeItem(tokenkey);
+import { persistSession, getSession, removeSession } from "../../utils/session";
 
 const initialState = () => {
   const token = getSession();
@@ -39,12 +31,12 @@ export const userSlice = createSlice({
       removeSession();
     },
   },
-  extraReducers(builder) { 
+  extraReducers(builder) {
     builder.addCase(login.pending, (state) => {
       state.status = "loading";
     });
     builder.addCase(login.fulfilled, (state, action) => {
-      //fulfilled es que la promesa se complrtó 
+      //fulfilled es que la promesa se complrtó
       state.status = "logged";
       state.token = action.payload.token;
       state.data = jwt_decode(action.payload.token); // Buffer.from(action.payload.token.split(".")[1]//(rompe), "base64"); // atob(action.payload.token.split(".")[1]) //(esta deprecado)

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState, KeyboardEvent } from "react";
+import { useNavigate, Form } from "react-router-dom";
 import {
   FormControl,
   FormLabel,
@@ -7,9 +7,13 @@ import {
   Container,
   Button,
   Text,
+  Grid,
+  GridItem,
 } from "@chakra-ui/react";
 
 import { useDispatch, useSelector } from "react-redux";
+//useDispatch: Permite acceder a las acciones del "store", xej: "login"
+//useSelectro: Accede al estado del "store"
 import { login } from "../store/states/user";
 
 const LoginForm = () => {
@@ -22,8 +26,16 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [isFormFull, setIsFormFull] = useState(false);
 
-  const handleRegister = () => {dispatch(login({ email, password }))
-console.log("entro")}
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && isFormFull) {
+      handleRegister();
+    }
+  };
+
+  const handleRegister = () => {
+    dispatch(login({ email, password }));
+    console.log("entro");
+  };
 
   const handleRegistrationClick = () => {
     navigate("/register");
@@ -59,6 +71,7 @@ console.log("entro")}
                   autoComplete="off"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={handleKeyDown}
                 />
               </FormControl>
               <FormControl id="password" marginBottom={10} isRequired>
@@ -67,27 +80,36 @@ console.log("entro")}
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  onKeyDown={handleKeyDown}
                 />
               </FormControl>
               {user?.error && <Text color="red">{user.error}</Text>}
-              <Button
-                type="button"
-                onClick={handleRegister}
-                backgroundColor="green"
-                textColor="white"
-                isDisabled={!isFormFull}
-              >
-                Ingresar
-              </Button>
+              <Grid templateColumns="repeat(2, 1fr)" gap={10} placeItems="center">
+                <GridItem colSpan={2}>
+                  <Button
+                    w={200}
+                    type="button"
+                    onClick={handleRegister}
+                    backgroundColor="green"
+                    textColor="white"
+                    isDisabled={!isFormFull}
+                  >
+                    Ingresar
+                  </Button>
+                </GridItem>
+                <GridItem colSpan={2}>
+                  <Button
+                   w={200}
+                    type="button"
+                    backgroundColor="green"
+                    textColor="white"
+                    onClick={handleRegistrationClick}
+                  >
+                    Registrarme
+                  </Button>
+                </GridItem>
+              </Grid>
             </form>
-            <Button
-              type="button"
-              backgroundColor="green"
-              textColor="white"
-              onClick={handleRegistrationClick}
-            >
-              Registrarme
-            </Button>
           </>
         )}
       </Container>
