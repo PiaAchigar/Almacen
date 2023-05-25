@@ -58,9 +58,15 @@ const login = async (req, res) => {
   //usar Redux acá
 };
 
-// const deleteUser = async (req, res) => {
-//   await userService.deleteOne({ _id: req.id })
-// }
+const updatePassword = async (req, res) => {
+  const { id, password } = req.params;
+  try {
+    await userService.updatePassword(id, password);
+    return res.status(204).end();
+  } catch (err) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -75,5 +81,6 @@ module.exports = {
   getUsers,
   getUserById,
   login,
+  updatePassword,
   deleteUser,
 };
