@@ -1,5 +1,5 @@
 import { useEffect, useState, KeyboardEvent } from "react";
-import { useNavigate, Form } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   FormControl,
   FormLabel,
@@ -35,6 +35,7 @@ const LoginForm = () => {
   const handleRegister = () => {
     dispatch(login({ email, password }));
     console.log("entro");
+    navigate("/principal");
   };
 
   const handleRegistrationClick = () => {
@@ -54,19 +55,41 @@ const LoginForm = () => {
   }, [user.status]);
   return (
     <>
-      <Container maxW="md" maxH="md" direction={"colum"} placeItems="center">
-        {user.status === "loading" && <div>la ruedita.. esta cargando</div>}
+      <Container
+        maxW="xl"
+        maxH="md"
+        direction={"colum"}
+        placeItems="center"
+        borderWidth="1px"
+        backgroundColor="withe"
+        boxShadow="0 0 10px 2px rgba(31,53,94, .75), 0 1px 1px rgba(0, 0, 0, .15)"
+        borderRadius={10}
+        pt={50}
+        pb={600}
+        px={100}
+        
+      >
+        {user.status === "loading" && <div>Cargando...</div>}
         {user.status === "logged" && (
           <div>
-            <p>ya esta logueado</p>
+            <p>Ya esta logueado</p>
           </div>
         )}
         {user.status === "unlogged" && (
           <>
             <form>
+              <Grid placeItems="center" color="rgb(31,53,94)" pb={10}>
+                <GridItem fontSize={60} fontWeight="bold">
+                  Complexa
+                </GridItem>
+                <GridItem fontSize={24} fontWeight="medium">
+                  División depósitos
+                </GridItem>
+              </Grid>
               <FormControl id="name" marginBottom={10} isRequired>
                 <FormLabel>Email</FormLabel>
                 <Input
+                  _hover={{ bg: "#ebedf0" }}
                   type="email"
                   autoComplete="off"
                   value={email}
@@ -77,6 +100,7 @@ const LoginForm = () => {
               <FormControl id="password" marginBottom={10} isRequired>
                 <FormLabel>Password</FormLabel>
                 <Input
+                  _hover={{ bg: "#ebedf0" }}
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -84,13 +108,17 @@ const LoginForm = () => {
                 />
               </FormControl>
               {user?.error && <Text color="red">{user.error}</Text>}
-              <Grid templateColumns="repeat(2, 1fr)" gap={10} placeItems="center">
+              <Grid
+                templateColumns="repeat(2, 1fr)"
+                gap={10}
+                placeItems="center"
+              >
                 <GridItem colSpan={2}>
                   <Button
                     w={200}
                     type="button"
                     onClick={handleRegister}
-                    backgroundColor="green"
+                    backgroundColor="rgb(0,128,101)"
                     textColor="white"
                     isDisabled={!isFormFull}
                   >
@@ -99,9 +127,9 @@ const LoginForm = () => {
                 </GridItem>
                 <GridItem colSpan={2}>
                   <Button
-                   w={200}
+                    w={200}
                     type="button"
-                    backgroundColor="green"
+                    backgroundColor="rgb(0,128,101)"
                     textColor="white"
                     onClick={handleRegistrationClick}
                   >

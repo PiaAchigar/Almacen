@@ -5,17 +5,22 @@ const Principal = () => {
   return (
     <>
       <Grid
-        maxW="md"
+      width={700}
         maxH="md"
         templateColumns="repeat(2, 1fr)"
-        gap={6}
+        gap={20}
         placeItems="center"
-        margin="auto"
+        pt={100}
+        pb={350}
+        pl={10}
+        pr={10}
+        boxShadow="0 0 10px 2px rgba(31,53,94, .75), 0 1px 1px rgba(0, 0, 0, .10)"
+        borderRadius={10}
       >
         <NavLink to="/carga">
           <Button
             type="buttom"
-            backgroundColor="green"
+            backgroundColor="rgb(0,128,101)"
             textColor="white"
             width={190}
           >
@@ -25,7 +30,7 @@ const Principal = () => {
         <NavLink to="/retirar">
           <Button
             type="buttom"
-            backgroundColor="green"
+            backgroundColor="rgb(0,128,101)"
             textColor="white"
             width={190}
           >
@@ -35,7 +40,7 @@ const Principal = () => {
         <NavLink to="/productos">
           <Button
             type="buttom"
-            backgroundColor="green"
+            backgroundColor="rgb(0,128,101)"
             textColor="white"
             width={190}
           >
@@ -46,7 +51,7 @@ const Principal = () => {
         <NavLink to="/actualizar">
           <Button
             type="buttom"
-            backgroundColor="green"
+            backgroundColor="rgb(0,128,101)"
             textColor="white"
             width={190}
           >

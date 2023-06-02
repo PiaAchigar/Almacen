@@ -9,8 +9,8 @@ const LogoutButton = () => {
     <NavLink to="/">
       <Button
         type="buttom"
-        backgroundColor="#1C750E"
-        textColor="#8EFD5E"
+        backgroundColor="rgb(0,128,101)"
+        textColor="white"
         width={150}
         onClick={() => {
           dispatch(logout())
