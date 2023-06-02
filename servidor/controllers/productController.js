@@ -11,28 +11,35 @@ const createProduct = async (req, res) => {
 
 const getProducts = async (req, res) => {
   try {
-    const users = await productService.getProducts();
-    return res.status(201).json(users);
+    const products = await productService.getProducts();
+    return res.status(201).json(products);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
 const getProductById = async (req, res) => {
   try {
-    const user = await productService.getProductById(req.id);
-    return res.status(201).json(user);
+    const product = await productService.getProductById(req.params.id);
+    
+    return res.status(201).json(product);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
 
 const updateProduct = async (req, res) => {
-  const { id, product } = req.params;
+  //const { id, product } = req.params;
+  const {id} = req.params
+  const product = req.body
   try {
-    await productService.updateProduct(id, product);
-    return res.status(204).end();
+   await productService.updateProduct(id, product);
+    return res.status(200).end();
+    // const updatedProduct = await productService.updateProduct(id, product);
+    // return res.status(200).json(updatedProduct);
+    // await productService.updateProduct(id, product);
+    // return res.status(204).end();
   } catch (err) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: err.message });
   }
 };
 

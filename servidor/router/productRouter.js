@@ -9,10 +9,10 @@ const {
 
 const router = Router();
 
-router.post("/", createProduct);
-router.get("/", getProducts);
-router.get("/:id?", getProductById);
-router.put("/:id", updateProduct); 
-router.delete("/:id", deleteProduct);
+router.post("/", createProduct); //funciona
+router.get("/", getProducts); //funciona
+router.get("/:id?", getProductById); //funciona
+router.put("/:id", updateProduct); //funciona
+router.delete("/:id", deleteProduct);//funciona - y si quiero eliminar de a muchos??
 
 module.exports = router;
