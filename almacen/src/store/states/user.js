@@ -37,11 +37,13 @@ export const userSlice = createSlice({
     });
     builder.addCase(login.fulfilled, (state, action) => {
       //fulfilled es que la promesa se complrtó
+      console.log(action)
+      persistSession(action.payload.token);
       state.status = "logged";
       state.token = action.payload.token;
       state.data = jwt_decode(action.payload.token); // Buffer.from(action.payload.token.split(".")[1]//(rompe), "base64"); // atob(action.payload.token.split(".")[1]) //(esta deprecado)
       //en data me queda guardado la info del usuario, lo que mando en ese token
-      persistSession(action.payload.token);
+      
       // window.location.href = "/principal";
     });
     builder.addCase(login.rejected, (state, action) => {

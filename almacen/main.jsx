@@ -20,11 +20,12 @@ const theme = extendTheme({ colors });
 
 const rootElement = document.getElementById("root");
 ReactDOM.createRoot(rootElement).render(
-  <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </ChakraProvider>
-  </React.StrictMode>
+  //<React.StrictMode>
+  <ChakraProvider theme={theme}>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </ChakraProvider>
+  //</React.StrictMode>
+  //esto hace que se repita el useEffect
 );

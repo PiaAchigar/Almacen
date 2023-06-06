@@ -35,7 +35,7 @@ const LoginForm = () => {
   const handleRegister = () => {
     dispatch(login({ email, password }));
     console.log("entro");
-    navigate("/principal");
+    //navigate("/principal"); no va a acá, lo tengo que hacer por el servicio
   };
 
   const handleRegistrationClick = () => {

@@ -1,45 +1,51 @@
-//24/05/23 no termino de entender ésto!
-import jwt_decode from "jwt-decode";
-//import {getSession, persistSession, removeSession} from '../../utils/session';
-import { createSlice } from "@reduxjs/toolkit";
-//import {login} from './user';
+//Utilizo éste Redux(productSlice) (o gestor de estado de productos) con el "useSelector" desde otro componente
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { fetchProducts } from "../../services/product.service";
 
 const initialState = () => {
   return {
-    product,
+    products: [],
     error: null,
   };
 };
+
+export const getProducts = createAsyncThunk("product/getProducts", async () => {
+  const response = await fetchProducts();
+  return response;
+});
 
 export const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-    logout: (state) => {
-      state.token = null;
-      state.data = {};
-      state.status = "unlogged";
-      state.error = null;
-      removeSession();
+    //acciones realacionadas con la gestión de productos
+    setProducts: (state, action) => {
+      state.products = action.payload;
+    },
+    setProductById: (state, action) => {
+      state.products = action.payload;
+    },
+    addProduct: (state, action) => {
+      state.products.push(action.payload);
+    },
+    deleteProduct: (state, action) => {
+      const productId = action.payload;
+      state.products = state.products.filter(
+        (product) => product.id !== productId
+      );
+    },
+    updateProduct: (state, action) => {
+      const updatedProduct = action.payload;
+      state.products = state.products.map((product) =>
+        product.id === updatedProduct.id ? updatedProduct : product
+      );
     },
   },
   extraReducers(builder) {
-    builder.addCase(login.pending, (state) => {
-      state.status = "loading";
-    });
-    builder.addCase(login.fulfilled, (state, action) => {
-      //fulfilled es que la promesa se complrtó
-      state.status = "logged";
-      state.token = action.payload.token;
-      state.data = jwt_decode(action.payload.token); // Buffer.from(action.payload.token.split(".")[1]//(rompe), "base64"); // atob(action.payload.token.split(".")[1]) //(esta deprecado)
-      //en data me queda guardado la info del usuario, lo que mando en ese token
-      persistSession(action.payload.token);
-      // window.location.href = "/principal";
-    });
-    builder.addCase(login.rejected, (state, action) => {
-      state.status = "unlogged";
-      state.error = "Credenciales invalidas";
-    });
+    //inicio del servicio
+      builder.addCase(getProducts.fulfilled, (state, action) => {
+        state.products = action.payload;
+      });
   },
 });
 
