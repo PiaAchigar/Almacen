@@ -50,7 +50,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (user.status === "logged") {
-      navigate("/principal");
+      navigate("/productos");
     }
   }, [user.status]);
   return (

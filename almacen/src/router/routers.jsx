@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 
 export const RouterApp = () => {
   const user = useSelector((state) => state.user);
-  console.log(user);
+  //console.log(user);
   return (
     <BrowserRouter>
       <Routes>
