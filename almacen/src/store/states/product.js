@@ -1,18 +1,39 @@
 //Utilizo éste Redux(productSlice) (o gestor de estado de productos) con el "useSelector" desde otro componente
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchProducts } from "../../services/product.service";
+import {
+  fetchProducts,
+  createProductService,
+} from "../../services/product.service";
 
 const initialState = () => {
+  // products, totalItems, totalPages: Math.ceil(totalItems / size), page}
   return {
     products: [],
+    totalItems: 0,
+    totalPages: 0,
+    page: 1,
     error: null,
+    loading: true,
   };
 };
 
-export const getProducts = createAsyncThunk("product/getProducts", async () => {
-  const response = await fetchProducts();
-  return response;
-});
+export const getProducts = createAsyncThunk(
+  "product/getProducts",
+  async ({ pageNumber, size }) => {
+    const response = await fetchProducts({ pageNumber, size });
+    return response;
+  }
+);
+
+export const createProduct = createAsyncThunk(
+  "product/createProduct",
+  async (product) => {
+    console.log("entro a product.js - createProduct");
+    const response = await createProductService(product); //no se ejecuta ésta linea
+    console.log(response);
+    return response;
+  }
+);
 
 export const productSlice = createSlice({
   name: "product",
@@ -43,9 +64,25 @@ export const productSlice = createSlice({
   },
   extraReducers(builder) {
     //inicio del servicio
-      builder.addCase(getProducts.fulfilled, (state, action) => {
-        state.products = action.payload;
-      });
+    builder.addCase(getProducts.fulfilled, (state, action) => {
+      state.products = action.payload.products;
+      state.totalItems = action.payload.totalItems;
+      state.totalPages = action.payload.totalPages;
+      state.page = action.payload.page;
+      state.loading = false;
+    });
+    builder.addCase(getProducts.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(getProducts.rejected, (state) => {
+      state.products = [];
+      state.totalItems = 0;
+      state.totalPages = 0;
+      state.page = 1;
+      state.loading = false;
+      state.error = "Hubo un error al solicitar los productos";
+    });
   },
 });
 
