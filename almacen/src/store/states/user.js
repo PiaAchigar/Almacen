@@ -37,7 +37,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(login.fulfilled, (state, action) => {
       //fulfilled es que la promesa se complrtó
-      console.log(action)
+      //console.log(action)
       persistSession(action.payload.token);
       state.status = "logged";
       state.token = action.payload.token;

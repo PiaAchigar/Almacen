@@ -98,7 +98,7 @@ const Carga = () => {
   return (
     <>
       <Grid templateColumns="1fr 3fr" gap={2} placeItems="center" margin="auto">
-        <NavLink to="/principal">
+        <NavLink to="/productos">
           <ArrowBackIcon
             boxSize={10}
             color="rgb(31,53,94)"

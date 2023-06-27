@@ -27,12 +27,11 @@ export const RouterApp = () => {
         {user.status === "logged" && (
           <>
             <Route path="/register" element={<Register />} />
-            <Route path="/principal" element={<Principal />} />
             <Route path="/carga" element={<Carga />} />
             <Route path="/retirar" element={<Retirar />} />
             <Route path="/productos" element={<Productos />} />
             <Route path="/actualizar" element={<Actualizar />} />
-            <Route path="*" element={<Navigate to="/principal" replace/>}/>
+            <Route path="*" element={<Navigate to="/productos" replace/>}/>
           </>
         )}
 

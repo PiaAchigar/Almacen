@@ -13,8 +13,7 @@ const LogoutButton = () => {
         textColor="white"
         width={150}
         onClick={() => {
-          dispatch(logout())
-      console.log("salio")}}
+          dispatch(logout())}}
       >
         SALIR
       </Button>

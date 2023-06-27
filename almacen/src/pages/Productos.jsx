@@ -17,6 +17,7 @@ import {
   Select,
   Input,
 } from "@chakra-ui/react";
+import ButtonComplexa from "../components/ButtonComplexa"
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 //useDispatch: Permite acceder a las acciones del "store", xej: "login"
@@ -24,9 +25,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getProducts } from "../store/states/product";
 //import {productSlice} from './store/states/product';
-//import ButtonComplexa from "../components/ButtonComplexa"
+
+import { logout } from "../store/states/user";
 
 const Productos = () => {
+ 
   const { products, page, totalItems, totalPages, loading, error } =
     useSelector((state) => state.products);
   //Array de opciónes para la cantidad de productos por página
@@ -73,7 +76,8 @@ const Productos = () => {
     <>
       <Grid templateColumns="1fr 3fr" gap={2}>
         <GridItem justifySelf="center" alignSelf="center" mb={10}>
-          <NavLink to="/principal">
+          <NavLink to="/login" onClick={() => {
+          dispatch(logout())}}>
             <ArrowBackIcon
               boxSize={10}
               color="rgb(31,53,94)"
@@ -203,47 +207,31 @@ const Productos = () => {
           )}
         </GridItem>
         <GridItem colSpan={2} m={2} display="flex" justifyContent="center">
-          <Button mx={10}
-          backgroundColor="rgba(80, 123, 114, 0.9)"
-          color="white"
-          width={190}
-            onClick={() => {
+          <ButtonComplexa marg={1} color="white" size={140} backgroundColor="rgba(80, 123, 114, 0.9)" innerHTML="Anterior" onClick={() => {
               if (page > 1) {
                 dispatch(getProducts({ pageNumber: page - 1, size }));
               }
             }}
-            disabled={page <= 1}
-          >
-            Anterior
-          </Button>
-          <Button
-          backgroundColor="rgba(80, 123, 114, 0.9)"
-          textColor="white"
-          width={190}
-            onClick={() => {
+            disabled={page <= 1}/>
+          <ButtonComplexa marg={1} color="white" size={140} backgroundColor="rgba(80, 123, 114, 0.9)" innerHTML="Siguiente" onClick={() => {
               if (totalPages > page) {
                 dispatch(getProducts({ pageNumber: page + 1, size }));
               }
             }}
-            disabled={totalPages <= page}
-          >
-            Siguiente
-          </Button>
+            disabled={totalPages <= page}/>
         </GridItem>
         <div>{loading && <Box>cargando</Box>}</div>
         <div>{error?.length > 0 && <Box>{error}</Box>}</div>
-        <GridItem colSpan={2} m={10}>
+        <GridItem colSpan={2} backgroundColor="rgba(161, 162, 164, 0.50)" h={150} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <NavLink to="/carga">
-            <Button
-              type="buttom"
-              backgroundColor="rgb(0,128,101)"
-              textColor="white"
-              width={190}
-            >
-              Cargar Productos
-            </Button>
+          <ButtonComplexa marg={2} color="white" size={180} backgroundColor="rgb(31,53,94)" innerHTML="Cargar Productos"/>
           </NavLink>
-          {/* <ButtonComplexa color="red" size={180} backgroundColor="blue" innerHTML="Hola"/> */}
+          <NavLink to="/actualizar">
+          <ButtonComplexa marg={2} color="white" size={180} backgroundColor="rgb(31,53,94)" innerHTML="Actualizar"/>
+          </NavLink>
+          <NavLink to="/retirar">
+          <ButtonComplexa marg={2} color="white" size={180} backgroundColor="rgb(31,53,94)" innerHTML="Retirar Prodcuctos"/>
+          </NavLink>
         </GridItem>
       </Grid>
     </>
