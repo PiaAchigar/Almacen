@@ -74,7 +74,7 @@ const Productos = () => {
 
   return (
     <>
-      <Grid templateColumns="1fr 3fr" gap={2}>
+      <Grid templateColumns="1fr 3fr" gap={2} backgroundColor="rgba(161, 162, 164, 0.50)">
         <GridItem justifySelf="center" alignSelf="center" mb={10}>
           <NavLink to="/login" onClick={() => {
           dispatch(logout())}}>
@@ -88,7 +88,7 @@ const Productos = () => {
             />
           </NavLink>
         </GridItem>
-        <GridItem alignSelf="center" mb={10}>
+        <GridItem alignSelf="center" mb={10} >
           <Heading
             as="h1"
             size="3xl"
@@ -224,13 +224,13 @@ const Productos = () => {
         <div>{error?.length > 0 && <Box>{error}</Box>}</div>
         <GridItem colSpan={2} backgroundColor="rgba(161, 162, 164, 0.50)" h={150} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <NavLink to="/carga">
-          <ButtonComplexa marg={2} color="white" size={180} backgroundColor="rgb(31,53,94)" innerHTML="Cargar Productos"/>
+          <ButtonComplexa marg={2} color="white" size={200} backgroundColor="rgb(31,53,94)" innerHTML="Cargar Productos"/>
           </NavLink>
           <NavLink to="/actualizar">
-          <ButtonComplexa marg={2} color="white" size={180} backgroundColor="rgb(31,53,94)" innerHTML="Actualizar"/>
+          <ButtonComplexa marg={2} color="white" size={200} backgroundColor="rgb(31,53,94)" innerHTML="Actualizar"/>
           </NavLink>
           <NavLink to="/retirar">
-          <ButtonComplexa marg={2} color="white" size={180} backgroundColor="rgb(31,53,94)" innerHTML="Retirar Prodcuctos"/>
+          <ButtonComplexa marg={2} color="white" size={200} backgroundColor="rgb(31,53,94)" innerHTML="Retirar Prodcuctos"/>
           </NavLink>
         </GridItem>
       </Grid>
