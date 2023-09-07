@@ -14,11 +14,6 @@ export default defineConfig({
   build: {
     outDir,
     emptyOutDir: true,
-    rollupOptions: {
-      input: {
-        main: "index.html",
-      },
-    },
   },
   assetsDir: "img",
 });
