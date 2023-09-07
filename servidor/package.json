@@ -6,7 +6,8 @@
   "scripts": {
     "mongo": "no docker-compose up -d",
     "watch": "nodemon server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start":"node server.js"
   },
   "keywords": [],
   "author": "",
