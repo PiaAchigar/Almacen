@@ -44,13 +44,18 @@ jobs:
           name: production-files
           path: ./dist
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v2
-        with:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            BRANCH: gh-pages # The branch the action should deploy to.
-            FOLDER: gh-pages # The folder the action should deploy.
-            SINGLE_COMMIT: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
+
+       # Configurar las credenciales de GitHub para el despliegue
+      - name: Desplegar a GitHub Pages..
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          cd dist
+          git init
+          git add .
+          git commit -m "GitHub Actions Build desde .yml"
+
+          git remote add gh-pages-remote https://github.com/PiaAchigar/Almacen.git
+
+          git push --force gh-pages-remote main:gh-pages
+       
