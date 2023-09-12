@@ -57,5 +57,5 @@ jobs:
 
           git remote add gh-pages-remote https://github.com/PiaAchigar/Almacen.git
 
-          git push --force gh-pages-remote main:gh-pages
+          git push --force gh-pages-remote master:gh-pages
        
