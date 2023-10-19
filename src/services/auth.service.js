@@ -3,7 +3,9 @@ export async function loginService(email, password) {
 //   35.160.120.126
 // 44.233.151.27
 // 34.211.200.85
-  const response = await fetch("http://35.160.120.126/login", {
+//http://35.160.120.126:10000/login
+//http://localhost:3001/login
+  const response = await fetch("http://localhost:3001/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

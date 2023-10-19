@@ -1,4 +1,4 @@
-//Utilizo éste Redux(productSlice) (o gestor de estado de productos) con el "useSelector" desde otro componente
+//Utilizo éste Redux(productSlice) (o gestor de estado de productos) con el "useSelector" lo recupero desde otro componente
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   fetchProducts,
@@ -87,3 +87,7 @@ export const productSlice = createSlice({
 });
 
 export default productSlice.reducer;
+
+//Redux es una librería para controlar el estado de nuestras aplicaciones web fácilmente, de una forma consistente entre cliente y servidor, testeable y con una gran experiencia de desarrollo. Redux está en gran parte influenciado por la arquitectura Flux propuesta por Facebook para las aplicaciones de React.
+
+//Serán los ficheros en los que tendremos la lógica de cada estado individual y que pasaremos al store más adelante
