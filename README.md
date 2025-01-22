@@ -6,3 +6,5 @@
     - Redux :
         - Slice : createSlice / createAsyncThunk / @reduxjs/toolkit
         - useDispatch, useSelector / react-redux
+
+[Link to the deploy](https://almacen-seven.vercel.app/ "Link al Almacen")
