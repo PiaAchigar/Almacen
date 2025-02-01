@@ -39,6 +39,8 @@ const LoginForm = () => {
   };
 
   const handleRegistrationClick = () => {
+    console.log("Ir a Registrarse")
+    console.log(user)
     navigate("/register");
   };
   const validateForm = () => {

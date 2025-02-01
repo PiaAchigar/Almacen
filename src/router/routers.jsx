@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 
 export const RouterApp = () => {
   const user = useSelector((state) => state.user);
-  //console.log(user);
+  console.log(user);
   return (
     <BrowserRouter>
       <Routes>
@@ -22,11 +22,11 @@ export const RouterApp = () => {
           <>
             <Route path="/login" element={<LoginForm />} />
             <Route index path="/" element={<LoginForm />} />
+            <Route path="/register" element={<Register />} />
           </>
         )}
         {user.status === "logged" && (
           <>
-            <Route path="/register" element={<Register />} />
             <Route path="/carga" element={<Carga />} />
             <Route path="/retirar" element={<Retirar />} />
             <Route path="/productos" element={<Productos />} />

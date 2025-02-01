@@ -12,7 +12,7 @@ export async function loginService(email, password) {
     },
     body: JSON.stringify({ email, password }),
   });
-
+console.log(response)
   const data = await response.json();
 
   if (response.status > 400) {
